@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "uuid": "^9.0.0"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "name": "bugeting-app-project-backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chanGomez/Bugeting-App-Project-Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chanGomez/Bugeting-App-Project-Backend/issues"
+  },
+  "homepage": "https://github.com/chanGomez/Bugeting-App-Project-Backend#readme",
+  "description": ""
+}
