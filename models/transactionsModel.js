@@ -4,24 +4,24 @@ const transactionsModel = [
   {
     id: uuidv4(),
     item_name: "berkin bag",
-    amount: 15000,
-    date: 7.5,
+    amount: 10,
+    date: "7/5",
     from: "deli",
     category: "nacessities "
   },
   {
     id: uuidv4(),
     item_name: "hamster",
-    amount: 15000,
-    date: 7.5,
+    amount: 20,
+    date: "7/6",
     from: "deli",
     category: "nacessities "
   },
   {
     id: uuidv4(),
     item_name: "skateboard",
-    amount: 15000,
-    date: 7.5,
+    amount: 30,
+    date: "7/8",
     from: "deli",
     category: "nacessities "
   }

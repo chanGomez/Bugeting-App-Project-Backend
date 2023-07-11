@@ -28,27 +28,29 @@ router.get("/:id", (req, res) => {
 })
 //WORKS
 //create, add to end of list 
-router.post("/", (req, res) => {
+router.post("/new-transaction", (req, res) => {
 
     const transaction  = req.body;
+    console.log(transaction);
+    console.log(req.body);
 
     if(!transaction){
         res
         .status(400)
         .json({ status: false, message: "You cannot create an empty todo" });
     } else{
-        // const newTransaction = {
-        //     id: uuidv4(),
-        //     item_name,
-        //     amount,
-        //     date,
-        //     from,
-        //     category,
-        // };
+        const newTransaction = {
+            id: uuidv4(),
+            item_name: transaction.item_name,
+            amount: transaction.amount,
+            date: transaction.date,
+            from: transaction.from,
+            category: transaction.category,
+        }
 
-        transactionsArray.push(transaction);
+        transactionsArray.push(newTransaction);
 
-        res.status(201).json({ status: true, data: transaction });
+        res.status(201).json({ status: true, data: newTransaction });
     }
 });
 
@@ -57,13 +59,15 @@ router.post("/", (req, res) => {
 router.delete("/:id", (req, res) => {
     const { id } = req.params;
 
-    const matched = transactionsArray.find((item) => item.id === id)
+    let foundIndex = transactionsArray.findIndex((item) => item.id === id);
 
-    if (!matched) {
+    if (foundIndex === -1) {
         res
           .status(404)
           .json({ status: false, message: "sorry, no transaction with this id is found" });
       } else {
+
+        let foundTransaction = transactionsArray[foundIndex];
     
         let newArray = transactionsArray.filter((item) => item.id !== id);
 
@@ -73,7 +77,7 @@ router.delete("/:id", (req, res) => {
         res.json({
           status: true,
           message: "success",
-          data: matched,
+          data: foundTransaction,
         });
       }
 
@@ -81,25 +85,27 @@ router.delete("/:id", (req, res) => {
 
 //WORKS
 //UPDATE
-router.put("/:id", (req, res) => {
-    const { id } = req.params;
-
-    const matched = transactionsArray.find((item) => item.id === id)
+router.put("/:id/edit", (req, res) => {
+    const id = req.params.id;
 
     const foundIndex = transactionsArray.findIndex((item) => item.id === id);
-
-    if(!matched){
+    // console.log(foundIndex);
+    if(foundIndex === -1){
         res
         .status(404)
-        .json({ status: false, message: "sorry, no transaction with this id is found" });
+        .json({ status: false, message: "Id not found!" });
     } else{
-        let newObject = {
-            ...matched,
-            ...req.body
-        }
 
-        transactionsArray.splice(foundIndex, 1, newObject)
-        res.json({ message: "success", status: true, data: newObj });
+        let foundTransaction = transactionsArray[foundIndex];
+
+        let newObj = {
+            ...foundTransaction,
+            ...req.body,
+          };
+
+        transactionsArray.splice(foundIndex, 1, newObj)
+        
+        res.json({ message: "success", status: true, data: newObj});
     }
 })
 
