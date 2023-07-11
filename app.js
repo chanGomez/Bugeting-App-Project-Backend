@@ -10,10 +10,11 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(cors());
 
+
 app.use("/transactions", transactionsControllers );
 
-// app.use("/*", (req, res) =>{
-//     res.send("Page Not Found")
-// })
+app.use("/*", (req, res) =>{
+    res.send("Page Not Found")
+})
 
 module.exports = app;

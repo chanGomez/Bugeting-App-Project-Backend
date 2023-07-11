@@ -4,14 +4,14 @@ const { v4: uuidv4 } = require("uuid");
 
 let transactionsArray = require("../models/transactionsModel")
 
-//WORKS
-//show all, entire list
+
+//SHOW
 router.get("/", (req, res) => {
     res.send(transactionsArray);
 })
 
-//WORKS
-// show individual but id
+
+// SHOW BY ID
 router.get("/:id", (req, res) => {
     const { id } = req.params;
 
@@ -26,13 +26,11 @@ router.get("/:id", (req, res) => {
         res.json({ status: true, data: matched });
     }
 })
-//WORKS
-//create, add to end of list 
+
+//CREATE
 router.post("/new-transaction", (req, res) => {
 
     const transaction  = req.body;
-    console.log(transaction);
-    console.log(req.body);
 
     if(!transaction){
         res
@@ -49,12 +47,10 @@ router.post("/new-transaction", (req, res) => {
         }
 
         transactionsArray.push(newTransaction);
-
         res.status(201).json({ status: true, data: newTransaction });
     }
 });
 
-//WORKS
 //Delete
 router.delete("/:id", (req, res) => {
     const { id } = req.params;
@@ -68,12 +64,10 @@ router.delete("/:id", (req, res) => {
       } else {
 
         let foundTransaction = transactionsArray[foundIndex];
-    
         let newArray = transactionsArray.filter((item) => item.id !== id);
 
         transactionsArray = newArray
     
-        //sending back the found object to delete
         res.json({
           status: true,
           message: "success",
@@ -83,13 +77,12 @@ router.delete("/:id", (req, res) => {
 
 })
 
-//WORKS
 //UPDATE
 router.put("/:id/edit", (req, res) => {
     const id = req.params.id;
 
     const foundIndex = transactionsArray.findIndex((item) => item.id === id);
-    // console.log(foundIndex);
+
     if(foundIndex === -1){
         res
         .status(404)
@@ -108,8 +101,6 @@ router.put("/:id/edit", (req, res) => {
         res.json({ message: "success", status: true, data: newObj});
     }
 })
-
-
 
 
 
